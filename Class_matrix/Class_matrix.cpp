@@ -20,15 +20,21 @@ int main()
 	A->printMatrix(4);
 
 	Matrix B = matrixCreate(4, 1);
-	B->matrixRandContent(100);
+	B->setElements(0, 0, 12);
+	B->setElements(1, 0, 15);
+	B->setElements(2, 0, 14);
+	B->setElements(3, 0, 21);
 	B->printMatrix(4);
 
-	LinearMatrixOperation solv = solverCreate();
-	(solv->matrixMultiply(A, B))->printMatrix(4);
+	cout << "det(A) " << A->determinant() << endl;
+	cout << endl;
+
+	LinearMatrixOperation equation = solverCreate();
+	equation->methodCramer(A, B);
+	equation->printSolvs();
 
 	delete A;
 	delete B;
-	delete solv;
 
 	_CrtDumpMemoryLeaks();
 	return 0;
