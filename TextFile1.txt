@@ -1,0 +1,125 @@
+    1)
+
+	cout << "Матрица 1: " << endl;
+	Matrix my_matrix1 = new _Matrix(3, 4);
+	my_matrix1->matrixRandContent(50);
+	my_matrix1->printMatrix(4);
+
+	cout << "Матрица 2: " << endl;
+	Matrix my_matrix2 = new _Matrix(4, 4);
+	my_matrix2->matrixRandContent(100);
+	my_matrix2->printMatrix(4);
+
+	cout << "Сумма элементов матрицы 1: ";
+	cout << my_matrix1->sumElements() << endl;
+	cout << "Сумма элементов матрицы 2: ";
+	cout << my_matrix2->sumElements() << endl;
+	cout << endl;
+
+	cout << "Произведение элементов матрицы 1: ";
+	cout << my_matrix1->mullElements() << endl;
+	cout << "Произведение элементов матрицы 2: ";
+	cout << my_matrix2->mullElements() << endl;
+	cout << endl;
+
+	cout << "Определитель матрицы 1: ";
+	cout << my_matrix1->determinant() << endl;
+	cout << "Определитель матрицы 2: ";
+	cout << my_matrix2->determinant() << endl;
+	cout << endl;
+
+	my_matrix1->printMatrix(4);
+	my_matrix2->printMatrix(4);
+
+	cout << "Умножение на 1 матриы на 3: " << endl;
+	my_matrix1->constMul(3);
+	my_matrix1->printMatrix(4);
+
+	cout << "Умножение 2 матрицы на 2: " << endl;
+	my_matrix2->constMul(2);
+	my_matrix2->printMatrix(4);
+
+	delete my_matrix1;
+	delete my_matrix2;
+
+	2)
+
+	Matrix A = matrixCreate(3, 3);
+
+	A->setElements(0, 0, 3);
+	A->setElements(0, 1, 5);
+	A->setElements(1, 0, 2);
+	A->setElements(1, 1, 6);
+
+	A->printMatrix(4);
+
+	cout << "mullElements(A): " << A->mullElements() << endl;
+
+	cout << "det(A): " << A->determinant() << endl;
+
+	delete A;
+
+	3)
+
+	Matrix A = matrixCreate(4, 4);
+	A->matrixRandContent(50);
+	A->printMatrix(4);
+
+	Matrix B = matrixCreate(4, 1);
+	B->setElements(0, 0, 12);
+	B->setElements(1, 0, 15);
+	B->setElements(2, 0, 14);
+	B->setElements(3, 0, 21);
+	B->printMatrix(4);
+
+	cout << "det(A) " << A->determinant() << endl;
+	cout << endl;
+
+	LinearMatrixOperation equation = solverCreate();
+	equation->methodCramer(A, B);
+	equation->printSolvs();
+
+	delete A;
+	delete B;
+
+	4)
+
+	Matrix A = matrixCreate(3, 3);
+	A->setElements(0, 0, 4);
+	A->setElements(0, 1, 5);
+	A->setElements(0, 2, 1);
+	A->setElements(1, 0, 7);
+	A->setElements(1, 1, 11);
+	A->setElements(1, 2, 8);
+	A->setElements(2, 0, 6);
+	A->setElements(2, 1, 9);
+	A->setElements(2, 2, 3);
+
+	A->printMatrix(4);
+
+
+	Matrix C = matrixCreate(3, 3);
+	C->setElements(0, 0, 4);
+	C->setElements(0, 1, 7);
+	C->setElements(0, 2, 1);
+	C->setElements(1, 0, 6);
+	C->setElements(1, 1, 11);
+	C->setElements(1, 2, 8);
+	C->setElements(2, 0, 12);
+	C->setElements(2, 1, 15);
+	C->setElements(2, 2, 8);
+
+	C->printMatrix(4);
+
+	Matrix RES = matrixCreate(3, 3);
+
+	LinearMatrixOperation lsolv = solverCreate();
+
+	RES = lsolv->matrixMultiply(A, C);
+
+	RES->printMatrix(4);
+
+	delete A;
+	delete C;
+	delete RES;
+	delete lsolv;
