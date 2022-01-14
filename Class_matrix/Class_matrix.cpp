@@ -14,7 +14,7 @@ using namespace std;
 int main()
 {
 	setlocale(LC_ALL, "");
-
+	
 	Matrix A = matrixCreate(4, 4);
 	A->matrixRandContent(50);
 	A->printMatrix(4);
@@ -35,6 +35,7 @@ int main()
 
 	delete A;
 	delete B;
+	delete equation;
 
 	_CrtDumpMemoryLeaks();
 	return 0;
