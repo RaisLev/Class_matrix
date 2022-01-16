@@ -43,20 +43,20 @@ class _LinearMatrixOperation
 {
 private:
 
-	double* cramer;
 	Matrix R;
 
 public:
 
 	_LinearMatrixOperation();
 	Matrix matrixMultiply(Matrix A, Matrix B);
-	double* methodCramer(Matrix A, Matrix B);
-	void printSolvs();
+	void methodCramer(Matrix A, Matrix B);
 	~_LinearMatrixOperation();
 
 private:
 
+	void printSolvs(double* cramer);
 	Matrix copyMatrix(Matrix A);
+	void resultAlloc(unsigned int An, unsigned int bm);
 };
 
 typedef _LinearMatrixOperation* LinearMatrixOperation;

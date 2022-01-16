@@ -37,16 +37,19 @@ unsigned int _Matrix::getM()
 
 void _Matrix::printMatrix(int w)
 {
-	for (unsigned int i = 0; i < n; i++)
+	if (c_ret != nullptr)
 	{
-		for (unsigned int j = 0; j < m; j++)
+		for (unsigned int i = 0; i < n; i++)
 		{
-			cout.width(w);
-			cout << *(*(c_ret + i) + j);
+			for (unsigned int j = 0; j < m; j++)
+			{
+				cout.width(w);
+				cout << *(*(c_ret + i) + j);
+			}
+			cout << ' ' << endl;
 		}
-		cout << ' ' << endl;
+		cout << endl;
 	}
-	cout << endl;
 }
 
 void _Matrix::setElements(unsigned int r, unsigned int c, double value)
@@ -205,11 +208,14 @@ bool _Matrix::matrixDegenerate()
 
 void _Matrix::Delete()
 {
-	for (unsigned int i = 0; i < n; i++)
+	if (c_ret != nullptr)
 	{
-		delete[] c_ret[i];
+		for (unsigned int i = 0; i < n; i++)
+		{
+			delete[] c_ret[i];
+		}
+		delete[] c_ret;
 	}
-	delete[] c_ret;
 }
 
 _Matrix::~_Matrix()
@@ -290,18 +296,20 @@ double** _Matrix::copyMatrix()
 
 void _Matrix::localeDelete(double** c_retCopy)
 {
-	for (unsigned int i = 0; i < n; i++)
+	if (c_retCopy != nullptr)
 	{
-		delete[] c_retCopy[i];
+		for (unsigned int i = 0; i < n; i++)
+		{
+			delete[] c_retCopy[i];
+		}
+		delete[] c_retCopy;
 	}
-	delete[] c_retCopy;
 }
 
 
 
 _LinearMatrixOperation::_LinearMatrixOperation()
 {
-	this->cramer = nullptr;
 	this->R = matrixCreate(0, 0);
 };
 
@@ -312,7 +320,7 @@ Matrix _LinearMatrixOperation::matrixMultiply(Matrix A, Matrix B)
 	unsigned int bn = B->getN();
 	unsigned int bm = B->getM();
 	
-	R = matrixCreate(An, bm);
+	resultAlloc(An, bm);
 
 	if (Am == bn)
 	{
@@ -329,10 +337,10 @@ Matrix _LinearMatrixOperation::matrixMultiply(Matrix A, Matrix B)
 		}
 		return R;
 	}
-	else return nullptr;
+	else return R;
 }
 
-double* _LinearMatrixOperation::methodCramer(Matrix A, Matrix B)
+void _LinearMatrixOperation::methodCramer(Matrix A, Matrix B)
 {
 	unsigned int An = A->getN();
 	unsigned int Am = A->getM();
@@ -345,7 +353,7 @@ double* _LinearMatrixOperation::methodCramer(Matrix A, Matrix B)
 	if ((An == Am) && (bn == An) && (bm == 1) && (A->matrixDegenerate() == false))
 	{
 		Matrix CopA = copyMatrix(A);
-		cramer = new double[An + 1];
+		double* cramer = new double[An + 1];
 		*(unsigned int*)cramer = An;
 		cramer++;
 		for (unsigned int k = 0; k < Am; k++)
@@ -365,12 +373,13 @@ double* _LinearMatrixOperation::methodCramer(Matrix A, Matrix B)
 			count++;
 		}
 		CopA->Delete();
-		return cramer;
+		printSolvs(cramer);
+		cramer--;
+		delete[] cramer;
 	}
-	else return nullptr;
 }
 
-void _LinearMatrixOperation::printSolvs()
+void _LinearMatrixOperation::printSolvs(double* cramer)
 {
 	if (cramer == nullptr) return;
 
@@ -384,7 +393,7 @@ void _LinearMatrixOperation::printSolvs()
 
 _LinearMatrixOperation::~_LinearMatrixOperation()
 {
-	delete R;
+	//R->Delete();
 }
 
 Matrix _LinearMatrixOperation::copyMatrix(Matrix A)
@@ -402,6 +411,12 @@ Matrix _LinearMatrixOperation::copyMatrix(Matrix A)
 		}
 	}
 	return Copy;
+}
+
+
+void _LinearMatrixOperation::resultAlloc(unsigned int An, unsigned int bm)
+{
+	R = matrixCreate(An, bm);
 }
 
 
