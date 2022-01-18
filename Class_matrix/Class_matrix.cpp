@@ -35,7 +35,10 @@ int main()
 
 	LinearMatrixOperation reshatel = solverCreate();
 	reshatel->methodCramer(A, B);
-	
+
+	A->matrixTranspose();
+	A->printMatrix(4);
+
 	delete A;
 	delete B;
 	delete reshatel;

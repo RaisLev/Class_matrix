@@ -9,6 +9,7 @@ private:
 
 	unsigned int n;
 	unsigned int m;
+	bool transposed;
 	double** c_ret;
 
 public:
@@ -23,6 +24,7 @@ public:
 	long double sumElements();
 	long double mullElements();
 	void constMul(double a);
+	void matrixTranspose();
 	long double determinant();
 	bool matrixDegenerate();
 	~_Matrix();
