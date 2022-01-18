@@ -60,5 +60,5 @@ private:
 
 typedef _LinearMatrixOperation* LinearMatrixOperation;
 
-Matrix matrixCreate(unsigned int r, unsigned c);
+Matrix matrixCreate(unsigned int r, unsigned int c);
 LinearMatrixOperation solverCreate();
