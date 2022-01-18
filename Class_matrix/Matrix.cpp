@@ -11,7 +11,6 @@ _Matrix::_Matrix(unsigned int n, unsigned int m)
 {
 	this->n = n;
 	this->m = m;
-	this->transposed = false;
 
 	c_ret = nullptr;
 	c_ret = new  double* [n];
@@ -38,24 +37,11 @@ unsigned int _Matrix::getM()
 
 void _Matrix::printMatrix(int w)
 {
-	if (c_ret != nullptr && transposed == false)
+	if (c_ret != nullptr)
 	{
 		for (unsigned int i = 0; i < n; i++)
 		{
 			for (unsigned int j = 0; j < m; j++)
-			{
-				cout.width(w);
-				cout << *(*(c_ret + i) + j);
-			}
-			cout << ' ' << endl;
-		}
-		cout << endl;
-	}
-	else if (c_ret != nullptr && transposed == true)
-	{
-		for (unsigned int i = 0; i < m; i++)
-		{
-			for (unsigned int j = 0; j < n; j++)
 			{
 				cout.width(w);
 				cout << *(*(c_ret + i) + j);
@@ -149,7 +135,9 @@ void _Matrix::matrixTranspose()
 	localeDelete(c_ret);
 	c_ret = nullptr;
 	c_ret = transp;
-	transposed = true;
+	unsigned int temp = n;
+	n = m;
+	m = temp;
 }
 
 long double _Matrix::determinant()
@@ -239,17 +227,9 @@ bool _Matrix::matrixDegenerate()
 
 _Matrix::~_Matrix()
 {
-	if (c_ret != nullptr && transposed == false)
+	if (c_ret != nullptr)
 	{
 		for (unsigned int i = 0; i < n; i++)
-		{
-			delete[] c_ret[i];
-		}
-		delete[] c_ret;
-	}
-	else if (c_ret != nullptr && transposed == true)
-	{
-		for (unsigned int i = 0; i < m; i++)
 		{
 			delete[] c_ret[i];
 		}

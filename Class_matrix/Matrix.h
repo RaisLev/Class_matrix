@@ -9,7 +9,6 @@ private:
 
 	unsigned int n;
 	unsigned int m;
-	bool transposed;
 	double** c_ret;
 
 public:
