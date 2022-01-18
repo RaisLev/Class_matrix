@@ -25,7 +25,6 @@ public:
 	void constMul(double a);
 	long double determinant();
 	bool matrixDegenerate();
-	void Delete();
 	~_Matrix();
 
 private:

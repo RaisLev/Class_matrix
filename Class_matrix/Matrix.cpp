@@ -206,7 +206,7 @@ bool _Matrix::matrixDegenerate()
 	else return true;
 }
 
-void _Matrix::Delete()
+_Matrix::~_Matrix()
 {
 	if (c_ret != nullptr)
 	{
@@ -216,15 +216,6 @@ void _Matrix::Delete()
 		}
 		delete[] c_ret;
 	}
-}
-
-_Matrix::~_Matrix()
-{
-	for (unsigned int i = 0; i < n; i++)
-	{
-		delete[] c_ret[i];
-	}
-	delete[] c_ret;
 }
 
 int _Matrix::search(double** c_retLocale, int m1, int n1, double what, bool match, unsigned int& uI, unsigned int& uJ, unsigned int starti, unsigned int startj)
@@ -310,7 +301,7 @@ void _Matrix::localeDelete(double** c_retCopy)
 
 _LinearMatrixOperation::_LinearMatrixOperation()
 {
-	this->R = matrixCreate(0, 0);
+	this->R = nullptr;
 };
 
 Matrix _LinearMatrixOperation::matrixMultiply(Matrix A, Matrix B)
@@ -372,7 +363,7 @@ void _LinearMatrixOperation::methodCramer(Matrix A, Matrix B)
 			}
 			count++;
 		}
-		CopA->Delete();
+		delete CopA;
 		printSolvs(cramer);
 		cramer--;
 		delete[] cramer;
@@ -393,7 +384,7 @@ void _LinearMatrixOperation::printSolvs(double* cramer)
 
 _LinearMatrixOperation::~_LinearMatrixOperation()
 {
-	//R->Delete();
+	//delete R;
 }
 
 Matrix _LinearMatrixOperation::copyMatrix(Matrix A)
@@ -417,10 +408,17 @@ Matrix _LinearMatrixOperation::copyMatrix(Matrix A)
 void _LinearMatrixOperation::resultAlloc(unsigned int An, unsigned int bm)
 {
 	R = matrixCreate(An, bm);
+	for (unsigned int i = 0; i < An; i++)
+	{
+		for (unsigned int j = 0; j < bm; j++)
+		{
+			R->setElements(i, j, 0);
+		}
+	}
 }
 
 
-Matrix matrixCreate(unsigned int r, unsigned c)
+Matrix matrixCreate(unsigned int r, unsigned int c)
 {
 	Matrix M = new _Matrix(r, c);
 	return M;
