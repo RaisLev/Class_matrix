@@ -24,6 +24,8 @@ public:
 	long double mullElements();
 	void constMul(double a);
 	void matrixTranspose();
+	void sortLines();
+	void sortColums();
 	long double determinant();
 	bool matrixDegenerate();
 	~_Matrix();
@@ -33,6 +35,7 @@ private:
 	int search(double** c_retLocale, int m1, int n1, double what, bool match, unsigned int& uI, unsigned int& uJ, unsigned int starti, unsigned int startj);
 	void swapcolumns(double** c_retLocale, int n2, int m2, unsigned int x1, unsigned int x2);
 	void swaprows(double** c_retLocale, int n3, int m3, unsigned int x1, unsigned int x2);
+	void sort(bool rowCol);
 	double** copyMatrix();
 	void localeDelete(double** c_retCopy);
 };
@@ -49,12 +52,12 @@ public:
 
 	_LinearMatrixOperation();
 	Matrix matrixMultiply(Matrix A, Matrix B);
-	void methodCramer(Matrix A, Matrix B);
+	void methodCramer(Matrix A, Matrix B, const char* nameVar);
 	~_LinearMatrixOperation();
 
 private:
 
-	void printSolvs(double* cramer);
+	void printSolvs(double* cramer, const char* nameVar);
 	Matrix copyMatrix(Matrix A);
 	void resultAlloc(unsigned int An, unsigned int bm);
 };
