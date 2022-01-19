@@ -38,6 +38,10 @@ int main()
 	LinearMatrixOperation reshatel = solverCreate();
 	reshatel->methodCramer(A, B, "y");
 
+	delete A;
+	delete B;
+	delete reshatel;
+
 	_CrtDumpMemoryLeaks();
 	return 0;
 }
