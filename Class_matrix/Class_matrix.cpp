@@ -15,6 +15,7 @@ int main()
 {
 	setlocale(LC_ALL, "");
 	
+
 	Matrix A = matrixCreate(3, 3);
 	A->setElements(0, 0, sin(1));
 	A->setElements(0, 1, -cos(2));
@@ -34,6 +35,20 @@ int main()
 	B->setElements(2, 0, tan(0.3));
 	cout << "B:" << endl;
 	B->printMatrix(10);
+	
+	A->sortColums();
+	cout << "sortedColums: " << endl;
+	A->printMatrix(4);
+	
+	A->matrixTranspose();
+	cout << "transpose: " << endl;
+	A->printMatrix(4);
+
+	Matrix B = matrixCreate(4, 1);
+	B->matrixRandContent(4);
+	cout << "B: " << endl;
+	B->printMatrix(4);
+
 
 	LinearMatrixOperation reshatel = solverCreate();
 	reshatel->methodCramer(A, B, "y");
