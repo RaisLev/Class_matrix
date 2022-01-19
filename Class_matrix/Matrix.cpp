@@ -140,6 +140,18 @@ void _Matrix::matrixTranspose()
 	m = temp;
 }
 
+void _Matrix::sortLines()
+{
+	bool sortType = false;
+	sort(sortType);
+}
+
+void _Matrix::sortColums()
+{
+	bool sortType = true;
+	sort(sortType);
+}
+
 long double _Matrix::determinant()
 {
 	double** c_retLocale = copyMatrix();
@@ -289,6 +301,54 @@ void _Matrix::swaprows(double** c_retLocale, int n3, int m3, unsigned int x1, un
 	return;
 }
 
+void _Matrix::sort(bool rowCol) 
+{
+	if (rowCol == false)
+	{
+		unsigned int key = 0;
+		double temp = 0;
+		for (unsigned int k = 0; k < n; k++)
+		{
+			for (unsigned int i = 0; i < m - 1; i++)
+			{
+				key = i + 1;
+				temp = c_ret[k][key];
+				for (unsigned int j = i + 1; j > 0; j--)
+				{
+					if (temp < c_ret[k][j - 1])
+					{
+						c_ret[k][j] = c_ret[k][j - 1];
+						key = j - 1;
+					}
+				}
+				c_ret[k][key] = temp;
+			}
+		}
+	}
+	else
+	{
+		unsigned int key = 0;
+		double temp = 0;
+		for (unsigned int k = 0; k < m; k++)
+		{
+			for (unsigned int i = 0; i < n - 1; i++)
+			{
+				key = i + 1;
+				temp = c_ret[key][k];
+				for (unsigned int j = i + 1; j > 0; j--)
+				{
+					if (temp < c_ret[j - 1][k])
+					{
+						c_ret[j][k] = c_ret[j - 1][k];
+						key = j - 1;
+					}
+				}
+				c_ret[key][k] = temp;
+			}
+		}
+	}
+}
+
 double** _Matrix::copyMatrix()
 {
 	double** c_retCopy = nullptr;
@@ -394,6 +454,7 @@ void _LinearMatrixOperation::printSolvs(double* cramer)
 	if (cramer == nullptr) return;
 
 	unsigned int length = *(unsigned int*)(cramer - 1);
+	cout << "Cramer solutions: " << endl;
 	for (unsigned int i = 0; i < length; i++)
 	{
 		cout << "x" << (i + 1) << ": " << cramer[i] << endl;
