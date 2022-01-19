@@ -410,7 +410,7 @@ Matrix _LinearMatrixOperation::matrixMultiply(Matrix A, Matrix B)
 	else return R;
 }
 
-void _LinearMatrixOperation::methodCramer(Matrix A, Matrix B)
+void _LinearMatrixOperation::methodCramer(Matrix A, Matrix B, const char* nameVar)
 {
 	unsigned int An = A->getN();
 	unsigned int Am = A->getM();
@@ -443,13 +443,13 @@ void _LinearMatrixOperation::methodCramer(Matrix A, Matrix B)
 			count++;
 		}
 		delete CopA;
-		printSolvs(cramer);
+		printSolvs(cramer, nameVar);
 		cramer--;
 		delete[] cramer;
 	}
 }
 
-void _LinearMatrixOperation::printSolvs(double* cramer)
+void _LinearMatrixOperation::printSolvs(double* cramer, const char* nameVar)
 {
 	if (cramer == nullptr) return;
 
@@ -457,7 +457,7 @@ void _LinearMatrixOperation::printSolvs(double* cramer)
 	cout << "Cramer solutions: " << endl;
 	for (unsigned int i = 0; i < length; i++)
 	{
-		cout << "x" << (i + 1) << ": " << cramer[i] << endl;
+		cout << nameVar << (i + 1) << ": " << cramer[i] << endl;
 	}
 	cout << endl;
 }

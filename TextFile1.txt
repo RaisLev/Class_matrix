@@ -1,43 +1,43 @@
-    //Сценарии использования//
+    //Г‘Г¶ГҐГ­Г Г°ГЁГЁ ГЁГ±ГЇГ®Г«ГјГ§Г®ГўГ Г­ГЁГї//
 	
 	1)
 
-	cout << "Матрица 1: " << endl;
+	cout << "ГЊГ ГІГ°ГЁГ¶Г  1: " << endl;
 	Matrix my_matrix1 = new _Matrix(3, 4);
 	my_matrix1->matrixRandContent(50);
 	my_matrix1->printMatrix(4);
 
-	cout << "Матрица 2: " << endl;
+	cout << "ГЊГ ГІГ°ГЁГ¶Г  2: " << endl;
 	Matrix my_matrix2 = new _Matrix(4, 4);
 	my_matrix2->matrixRandContent(100);
 	my_matrix2->printMatrix(4);
 
-	cout << "Сумма элементов матрицы 1: ";
+	cout << "Г‘ГіГ¬Г¬Г  ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў Г¬Г ГІГ°ГЁГ¶Г» 1: ";
 	cout << my_matrix1->sumElements() << endl;
-	cout << "Сумма элементов матрицы 2: ";
+	cout << "Г‘ГіГ¬Г¬Г  ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў Г¬Г ГІГ°ГЁГ¶Г» 2: ";
 	cout << my_matrix2->sumElements() << endl;
 	cout << endl;
 
-	cout << "Произведение элементов матрицы 1: ";
+	cout << "ГЏГ°Г®ГЁГ§ГўГҐГ¤ГҐГ­ГЁГҐ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў Г¬Г ГІГ°ГЁГ¶Г» 1: ";
 	cout << my_matrix1->mullElements() << endl;
-	cout << "Произведение элементов матрицы 2: ";
+	cout << "ГЏГ°Г®ГЁГ§ГўГҐГ¤ГҐГ­ГЁГҐ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў Г¬Г ГІГ°ГЁГ¶Г» 2: ";
 	cout << my_matrix2->mullElements() << endl;
 	cout << endl;
 
-	cout << "Определитель матрицы 1: ";
+	cout << "ГЋГЇГ°ГҐГ¤ГҐГ«ГЁГІГҐГ«Гј Г¬Г ГІГ°ГЁГ¶Г» 1: ";
 	cout << my_matrix1->determinant() << endl;
-	cout << "Определитель матрицы 2: ";
+	cout << "ГЋГЇГ°ГҐГ¤ГҐГ«ГЁГІГҐГ«Гј Г¬Г ГІГ°ГЁГ¶Г» 2: ";
 	cout << my_matrix2->determinant() << endl;
 	cout << endl;
 
 	my_matrix1->printMatrix(4);
 	my_matrix2->printMatrix(4);
 
-	cout << "Умножение на 1 матриы на 3: " << endl;
+	cout << "Г“Г¬Г­Г®Г¦ГҐГ­ГЁГҐ Г­Г  1 Г¬Г ГІГ°ГЁГ» Г­Г  3: " << endl;
 	my_matrix1->constMul(3);
 	my_matrix1->printMatrix(4);
 
-	cout << "Умножение 2 матрицы на 2: " << endl;
+	cout << "Г“Г¬Г­Г®Г¦ГҐГ­ГЁГҐ 2 Г¬Г ГІГ°ГЁГ¶Г» Г­Г  2: " << endl;
 	my_matrix2->constMul(2);
 	my_matrix2->printMatrix(4);
 
@@ -208,6 +208,37 @@
 	B->setElements(0, 1, 21);
 	B->setElements(0, 2, -11);
 	cout << "B: " << endl;
+	B->printMatrix(4);
+
+	B->matrixTranspose();
+	cout << "transp(B): " << endl;
+	B->printMatrix(4);
+
+	LinearMatrixOperation reshatel = solverCreate();
+	reshatel->methodCramer(A, B);
+
+	delete A;
+	delete B;
+	delete reshatel;
+
+	7)
+
+	Matrix A = matrixCreate(4, 4);
+	A->matrixRandContent(15);
+	cout << "A: " << endl;
+	A->printMatrix(4);
+	
+	A->sortColums();
+	cout << "sortedColums: " << endl;
+	A->printMatrix(4);
+	
+	A->matrixTranspose();
+	cout << "transpose: " << endl;
+	A->printMatrix(4);
+
+	Matrix B = matrixCreate(4, 1);
+	B->matrixRandContent(4);
+	cout << "B: " << end;
 	B->printMatrix(4);
 
 	B->matrixTranspose();

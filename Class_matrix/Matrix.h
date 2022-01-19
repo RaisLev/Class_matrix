@@ -52,12 +52,12 @@ public:
 
 	_LinearMatrixOperation();
 	Matrix matrixMultiply(Matrix A, Matrix B);
-	void methodCramer(Matrix A, Matrix B);
+	void methodCramer(Matrix A, Matrix B, const char* nameVar);
 	~_LinearMatrixOperation();
 
 private:
 
-	void printSolvs(double* cramer);
+	void printSolvs(double* cramer, const char* nameVar);
 	Matrix copyMatrix(Matrix A);
 	void resultAlloc(unsigned int An, unsigned int bm);
 };
